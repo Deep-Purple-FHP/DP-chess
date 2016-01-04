@@ -1,0 +1,46 @@
+
+.navbar.navbar-default {
+  border-radius: 0;
+  font-size: 24px;
+  color: (157,157,157);
+  margin-bottom: 0;
+}
+
+.navbar-default .navbar-brand {
+  font-size: 32px;
+  color: #60117A;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.6px
+}
+
+.hero {
+  background: url('international-chess.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 500px;
+  color: white;
+}
+
+.frosty {
+	margin-top: 50px;
+  	background:rgba(0,0,0, 0.5);
+	color: #FFFFFF;
+}
+
+.frosty h1 {
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: 100;
+}
+
+.frosty h2 {
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: 200;
+}
+
+.clr {
+  clear:both;
+}
+
