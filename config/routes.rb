@@ -6,6 +6,7 @@ DPChess::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
   resources :dashboards, :only => [:show]
+  resources :games
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
