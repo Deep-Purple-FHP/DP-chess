@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 1.2'
 #add user capacity
 gem 'devise', '>= 3.2.4'
 
+# FactoryGirl for testing
+gem 'factory_girl_rails', '~> 4.0'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
