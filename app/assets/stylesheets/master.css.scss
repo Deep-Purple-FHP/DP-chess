@@ -44,3 +44,12 @@
   clear:both;
 }
 
+#Board {
+  margin: auto;
+  background-image: url("/assets/Boards/Board_1.png");
+  background-size: contain;
+}
+
+.black, .white {
+  width:12.5%;
+}
