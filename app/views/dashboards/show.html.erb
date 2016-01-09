@@ -1,1 +1,39 @@
 <h1>Welcome to Deep Purple Chess!</h1>
+
+<!-- If game creators make game public, then other users
+can got to game show page and watch -->
+<h2>All Public games</h2>
+<% @games.each do |game| %>
+	<table>
+		<tr><%= link_to game.name, '#' %></tr>
+	</table>
+<% end %>
+
+
+<h2>Open games</h2>
+<i>Click to Join</i><br />
+
+	<!--<b>No open game</b><br/> -->
+	<%#= link_to 'Create New Game', '#', :class => 'btn btn-primary' %>
+	<%# end %>
+
+
+<% @games.each do |game| %>
+	<% if game.black_player_id.nil? %>
+		<table>
+			<tr><%= link_to game.name, '#' %></tr>
+		</table>
+	<% end %>
+<% end %>
+
+
+<h2>Your games in session</h2>
+<%# current_user.games.each do |game| %>
+	<h3 class="text-center">
+		<%#= link_to game.name, '#' %>
+	</h3>
+	<br />
+<%# end %>
+
+
+<%= link_to 'Create New Game', '#', :class => 'btn btn-primary' %>
