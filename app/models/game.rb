@@ -14,21 +14,21 @@ class Game < ActiveRecord::Base
         game_id: id,
         x_position: i,
         y_position: 6,
-        color: true  #assuming boolean value for white = true
+        color: 'white'
         )
     end
 
-    Rook.create(game_id: id, x_position: 0, y_position: 0, color: true)
-    Rook.create(game_id: id, x_position: 7, y_position: 0, color: true)
+    Rook.create(game_id: id, x_position: 0, y_position: 0, color: 'white')
+    Rook.create(game_id: id, x_position: 7, y_position: 0, color: 'white')
 
-    Knight.create(game_id: id, x_position: 1, y_position: 0, color: true)
-    Knight.create(game_id: id, x_position: 6, y_position: 0, color: true)
+    Knight.create(game_id: id, x_position: 1, y_position: 0, color: 'white')
+    Knight.create(game_id: id, x_position: 6, y_position: 0, color: 'white')
 
-    Bishop.create(game_id: id, x_position: 2, y_position: 0, color: true)
-    Bishop.create(game_id: id, x_position: 5, y_position: 0, color: true)
+    Bishop.create(game_id: id, x_position: 2, y_position: 0, color: 'white')
+    Bishop.create(game_id: id, x_position: 5, y_position: 0, color: 'white')
 
-    Queen.create(game_id: id, x_position: 3, y_position: 0, color: true)
-    King.create(game_id: id, x_position: 4, y_position: 0, color: true )
+    Queen.create(game_id: id, x_position: 3, y_position: 0, color: 'white')
+    King.create(game_id: id, x_position: 4, y_position: 0, color: 'white' )
     end
 
     #Black Pieces, this loop sets the entire row of pawns
@@ -37,21 +37,21 @@ class Game < ActiveRecord::Base
         game_id: id,
         x_position: i,
         y_position: 1,
-        color: false  #assuming boolean value for white = true
+        color: 'black'
         )
     end
 
-    Rook.create(game_id: id, x_position: 0, y_position: 7, color: false)
-    Rook.create(game_id: id, x_position: 7, y_position: 7, color: true)
+    Rook.create(game_id: id, x_position: 0, y_position: 7, color: 'black')
+    Rook.create(game_id: id, x_position: 7, y_position: 7, color: 'black')
 
-    Knight.create(game_id: id, x_position: 1, y_position: 7, color: false)
-    Knight.create(game_id: id, x_position: 6, y_position: 7, color: false)
+    Knight.create(game_id: id, x_position: 1, y_position: 7, color: "black")
+    Knight.create(game_id: id, x_position: 6, y_position: 7, color: "black")
 
-    Bishop.create(game_id: id, x_position: 2, y_position: 7, color: false)
-    Bishop.create(game_id: id, x_position: 5, y_position: 7, color: false)
+    Bishop.create(game_id: id, x_position: 2, y_position: 7, color: "black")
+    Bishop.create(game_id: id, x_position: 5, y_position: 7, color: "black")
 
-    Queen.create(game_id: id, x_position: 3, y_position: 7, color: false)
-    King.create(game_id: id, x_position: 4, y_position: 7, color: false)
+    Queen.create(game_id: id, x_position: 3, y_position: 7, color: "black")
+    King.create(game_id: id, x_position: 4, y_position: 7, color: "black")
     end
 
   end
