@@ -3,6 +3,7 @@ class DashboardsController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@games = Game.all
+		@opengames = Game.where("games.black_player_id IS NULL")
 	end
 
 
