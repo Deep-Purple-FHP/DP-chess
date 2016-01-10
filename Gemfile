@@ -37,6 +37,9 @@ gem 'devise', '>= 3.2.4'
 # FactoryGirl for testing
 gem 'factory_girl_rails', '~> 4.0'
 
+#jQuery to allow players to select piece to move and board destination
+gem 'jquery-ui-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
