@@ -53,3 +53,13 @@
 .black, .white {
   width:12.5%;
 }
+
+.dash {
+  background: url('/assets/Boards/Board_1.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 150px;
+  color: white;
+}
