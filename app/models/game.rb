@@ -29,7 +29,6 @@ class Game < ActiveRecord::Base
 
     Queen.create(game_id: id, x_position: 3, y_position: 0, color: 'white')
     King.create(game_id: id, x_position: 4, y_position: 0, color: 'white' )
-    end
 
     #Black Pieces, this loop sets the entire row of pawns
     (0..7).each do |i|
@@ -52,6 +51,6 @@ class Game < ActiveRecord::Base
 
     Queen.create(game_id: id, x_position: 3, y_position: 7, color: "black")
     King.create(game_id: id, x_position: 4, y_position: 7, color: "black")
-    end
-
   end
+
+end
