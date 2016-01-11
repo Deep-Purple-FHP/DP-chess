@@ -1,4 +1,37 @@
 <br />
+
+<script>
+    $(function() {
+      $( "td" ).hover(
+        function() {
+          $( this ).addClass( 'highlight_this_cell' );
+        }, 
+
+        function() {
+          $( this ).removeClass('highlight_this_cell' );
+         });
+
+      $( "td" ).click(
+        function() {
+          $ (this ).toggleClass ('select_this_cell' ); 
+        });
+
+
+      
+    });
+
+
+    // DONE:  Toggle does this automatically. Need to add click method next to select a piece and keep it highlighted, click again deselects
+
+    // DONE:  Then need to add ability to click on board location to select desired piece location
+        // sub-issue.  ATM, you can still click on yet more squares. 
+
+    //  Add some logic.  If two squares are selected, trigger alert alert box to confirm move?
+
+
+</script>
+
+
 <table id="Board" width="700px" height="700px">
   <tr id="row_1">
     <td id="H1" class="white"></td>
