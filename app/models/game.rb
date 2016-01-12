@@ -1,7 +1,10 @@
 class Game < ActiveRecord::Base
 
+
+
   has_many :players
   has_many :pieces
+
 
   after_create :populate_board!
 
@@ -13,9 +16,9 @@ class Game < ActiveRecord::Base
       Pawn.create(
         game_id: id,
         x_position: i,
-        y_position: 6,
+        y_position: 1,
         color: 'white'
-        )
+      )
     end
 
     Rook.create(game_id: id, x_position: 0, y_position: 0, color: 'white')
@@ -35,9 +38,9 @@ class Game < ActiveRecord::Base
       Pawn.create(
         game_id: id,
         x_position: i,
-        y_position: 1,
+        y_position: 6,
         color: 'black'
-        )
+      )
     end
 
     Rook.create(game_id: id, x_position: 0, y_position: 7, color: 'black')

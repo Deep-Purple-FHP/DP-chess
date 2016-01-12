@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160107001941) do
   end
 
   create_table "pieces", force: true do |t|
-    t.integer  "color"
+    t.string   "color"
     t.integer  "x_position"
     t.integer  "y_position"
     t.string   "state"

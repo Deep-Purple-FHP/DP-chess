@@ -8,14 +8,14 @@
         }, 
 
         function() {
-          $( this ).removeClass('highlight_this_cell' );
+          $( this ).removeClass( 'highlight_this_cell' );
          });
 
       $( "td" ).click(
         function(event) {
           var cell_ID = $(event.target).attr('id');
           console.log(cell_ID);
-          $ (this ).toggleClass ('select_this_cell' ); 
+          $ ( this ).toggleClass ( 'select_this_cell' ); 
         });      
     });
 
