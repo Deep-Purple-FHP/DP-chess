@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20160107001941) do
     t.datetime "updated_at"
   end
 
+  create_table "pieces", force: true do |t|
+    t.integer  "color"
+    t.integer  "x_position"
+    t.integer  "y_position"
+    t.string   "state"
+    t.string   "symbol"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
