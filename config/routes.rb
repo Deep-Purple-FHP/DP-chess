@@ -7,6 +7,7 @@ DPChess::Application.routes.draw do
   root 'static_pages#index'
   resources :dashboards, :only => [:show]
   resources :games
+  resources :pieces
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

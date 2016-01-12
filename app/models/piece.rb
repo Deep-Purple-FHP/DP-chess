@@ -5,6 +5,8 @@ class Piece < ActiveRecord::Base
   belongs_to :player
   belongs_to :game
 
+  # I'm thinking the x,y arrays should be turned into hashes.  Then this table can be searched in reverse.
+  # This will be important for the populate board method.
   @location = {
     {'A1': [0,0]}, {'B1': [1,0]}, {'C1': [2,0]}, {'D1': [3,0]}, {'E1': [4,0]}, {'F1': [5,0]}, {'G1': [6,0]} {'H1': [7,0]},
     {'A2': [0,1]}, {'B2': [1,1]}, {'C2': [2,1]}, {'D2': [3,1]}, {'E2': [4,1]}, {'F2': [5,1]}, {'G2': [6,1]} {'H1': [7,1]},
@@ -23,11 +25,11 @@ class Piece < ActiveRecord::Base
     @color = color
   end
 
-  def find_piece(cell_ID)
+  def find_piece(origin_ID)
     #this method should be passed the cell_ID of the piece the user selects via jQuery
 
     #then translate the cell_ID to x,y co-ordinates
-    xy_array = @location[cell_ID]
+    xy_array = @location[origin_ID]
     x = xy_array.fetch(0)
     y = xy_array.fetch(1)
 
@@ -39,8 +41,8 @@ class Piece < ActiveRecord::Base
     #  select target location for move
     # define the 'array' of board locations from a -> b
     # query  all the pieces x,y locations, do any of them match?
-    # 	if yes, then disallowed
-    # 	if no, move piece
+    #   if yes, then disallowed
+    #   if no, move piece
   end
 
 

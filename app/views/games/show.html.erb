@@ -1,6 +1,9 @@
 <br />
 
 <script>
+  var pieceLocation = ""
+  var pieceDestination = ""
+   
     $(function() {
       $( "td" ).hover(
         function() {
@@ -13,9 +16,12 @@
 
       $( "td" ).click(
         function(event) {
-          var cell_ID = $(event.target).attr('id');
-          console.log(cell_ID);
+          pieceLocation = $(event.target).attr('id');
           $ ( this ).toggleClass ( 'select_this_cell' ); 
+          console.log(pieceLocation);
+          $.post( url ), cell_ID, function (data) {
+            console.log(data)
+          }
         });      
     });
 
@@ -28,6 +34,7 @@
     // pull the cell id when clicked, pass that value to data    
 
     //  Add some logic.  If two squares are selected, trigger alert alert box to confirm move?
+    // Did a bunch of research tonight and my brain has now melted.  Becuase jQuery runs AFTER the ROR code, the only way to get access to the destination cell ID is to do an AJAX post request.  To do this, I will add a 'confirm move' button that the jQuery will listen for the click.  When the click occurs, this will trigger the AJAX request which will send the origin and destination cell IDs back to the server to update the piece location.  But where do I post to??? An html address?   
 
 
 </script>
