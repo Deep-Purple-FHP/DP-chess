@@ -1,3 +1,14 @@
+/*javascript styles*/
+
+.highlight_this_cell{
+    background-color: rgba(255, 255, 77, 0.7);
+}
+
+.select_this_cell{
+    background-color: rgba(255, 255, 77, 0.7);
+}
+
+/*end javascript styles*/
 
 .navbar.navbar-default {
   border-radius: 0;
@@ -44,3 +55,22 @@
   clear:both;
 }
 
+#Board {
+  margin: auto;
+  background-image: url("/assets/Boards/Board_1.png");
+  background-size: contain;
+}
+
+.black, .white {
+  width:12.5%;
+}
+
+.dash {
+  background: url('/assets/Boards/Board_1.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 150px;
+  color: white;
+}

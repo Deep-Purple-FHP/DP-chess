@@ -1,0 +1,50 @@
+<h1 class="text-center">Welcome to your Deep Purple dashboard!</h1>
+<br />
+
+<div class="dash">
+</div>
+
+<!-- If game creators make game public, then other users
+can access it to view from here -->
+<div class="col-xs-4 col-xs-offset-1">	
+	<h2>All Public games</h2>
+	<% @games.each do |game| %>
+		<table>
+			<tr><%= link_to game.name, '#' %></tr>
+		</table>
+	<% end %>
+</div>
+
+<div class="col-xs-4 col-xs-offset-1">	
+	<h2>Games with seats available</h2>
+	<i>Click to Join</i><br />
+	<% if @opengames.nil? %>
+		<b>No open games. Click below to create game</b>
+		<%= link_to 'Create New Game', '#', :class => 'btn btn-primary' %>
+	<% else %>
+		<% @opengames.each do |game| %>
+		<table>
+			<tr><%= link_to game.name, '#' %></tr>
+		</table>	
+		<% end %>
+	<% end %>
+
+</div>
+
+<br class="clr" />
+
+<div class="col-xs-4 col-xs-offset-1">	
+	<h2>Your games in session</h2>
+	<%# current_user.games.each do |game| %>
+		<h3 class="text-center">
+			<%#= link_to game.name, '#' %>
+		</h3>
+		<br />
+	<%# end %>
+	<%= link_to 'Create New Game', '#', :class => 'btn btn-primary' %>
+</div>
+
+<br class="clr" />
+
+
+
