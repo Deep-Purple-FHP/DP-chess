@@ -19,7 +19,7 @@
           pieceLocation = $(event.target).attr('id');
           $ ( this ).toggleClass ( 'select_this_cell' ); 
           console.log(pieceLocation);
-          $.post( url ), cell_ID, function (data) {
+          $.post( "pieces#update" ), pieceLocation, function (data) {
             console.log(data)
           }
         });      
