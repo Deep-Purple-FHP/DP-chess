@@ -1,5 +1,5 @@
 class Piece < ActiveRecord::Base
-  attr_accessor :game_id, :x_position, :y_position, :color
+  attr_accessor :game_id, :x_position, :y_position, :color, :icon
 
   # Piece < Player < Game < Active Record
   belongs_to :player
@@ -30,7 +30,7 @@ class Piece < ActiveRecord::Base
   # ]
 
 
-  def initialize
+  def initialize(game_id:, x_position:, y_position:, color:, icon:)
     @game_id = game_id
     @x_position = x_position
     @y_position = y_position

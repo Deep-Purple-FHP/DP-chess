@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
         game_id: id,
         x_position: i,
         y_position: 1,
-        color: 'white'
+        color: 'white',
         icon: 'white_pawn.png'
       )
     end
@@ -40,7 +40,7 @@ class Game < ActiveRecord::Base
         game_id: id,
         x_position: i,
         y_position: 6,
-        color: 'black'
+        color: 'black',
         icon: 'purple_pawn.png'
       )
     end
