@@ -35,19 +35,24 @@ class Piece < ActiveRecord::Base
     @x_position = x_position
     @y_position = y_position
     @color = color
+    @icon = icon
   end
 
-  def find_piece(origin_ID)
+  def find_piece(origin_cell)
     #this method should be passed the cell_ID of the piece the user selects via jQuery AJAX post request
 
     #then translate the cell_ID to x,y co-ordinates
-    xy_array = @location[origin_ID]
+    xy_array = @location[origin_cell]
     x = xy_array.fetch(0)
     y = xy_array.fetch(1)
 
-    #then search through all the pieces for a match to determine which piece needs to move.
-    return pieceID
 
+    #then search through all the pieces for a match to determine which piece needs to move.
+    Piece.each do |piece|
+      if piece.x_position = x  && piece.y_position = y
+        return piece.id
+      end
+    end
   end
 
   def capture
