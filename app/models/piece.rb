@@ -80,30 +80,41 @@ class Piece < ActiveRecord::Base
 
   end
 
+  def vertical_obstruction_check(destination_x, destination_y, overall_difference)
 
+    # Determine the differece between the destination space and the origin space
+    y_difference = destination_y - self.y_position
 
+    # Determines Y Increment
+    y_increment = overall_difference / y_difference
 
-  def horizontal_move_validator(destination_x, destination_y)
+    # Determines number of spaces to iterate through
+    # Does not include destination space
+    iterations = overall_difference - 1
 
-    # If the y coordinate is not constant, the move cannot be horizontal
-    if destination_y != self.y_position
-      return "Turn Method"
+    # Counter holds value to add to y during each iteration
+    y_iteration_count = y_increment
+
+    # Iterate through each space from origin to destination
+    # and ensure the spaces are empty
+    iterations.times do
+        # nil will be replaced with placeholder piece
+      if board[self.y_position + y_iteration_count][self.x_position] != nil
+        return "Turn Method"
+      end
+      y_iteration_count += y_increment
     end
 
-    # The destination cannot be the same as the origin
-    if destination_x == self.x_position
-      return "Turn Method"
-    end
+    # If no obstructions, return move method to check contents of destination position
+    # relocate piece, possibly capture, and update piece coordinates
+    return "Move Go!"
+
+  end
+
+  def horizontal_obstruction_check(destination_x, destination_y, overall_difference)
 
     # Determine the differece between the destination space and the origin space
     x_difference = destination_x - self.x_position
-
-    # Determine overall number of spaces between the destination and origin
-    if x_difference < 0
-      overall_difference = x_difference * -1
-    else
-      overall_difference = x_difference
-    end
 
     # Determines X Increment
     x_increment = overall_difference / x_difference
@@ -113,15 +124,16 @@ class Piece < ActiveRecord::Base
     iterations = overall_difference - 1
 
     # Counter holds value to add to x during each iteration
-    x_iteration = x_increment
+    x_iteration_count = x_increment
 
     # Iterate through each space from origin to destination
     # and ensure the spaces are empty
     iterations.times do
-      if board[self.y_position][self.x_position + x_iteration] != nil
+        # nil will be replaced with placeholder piece
+      if board[self.y_position][self.x_position + x_iteration_count] != nil
         return "Turn Method"
       end
-      x_iteration += x_increment
+      x_iteration_count += x_increment
     end
 
     # If no obstructions, return move method to check contents of destination position
@@ -129,35 +141,15 @@ class Piece < ActiveRecord::Base
     return "Move Go!"
 
   end
+  
 
-
-  def diagonal_move_validator(destination_x, destination_y)
+  def diagonal_obstruction_check(destination_x, destination_y, overall_difference)
 
     # Determine the difference between x origin and x destination
     x_difference = destination_x - self.x_position
 
     # Determine the difference between y origin and y destination
     y_difference = destination_y - self.y_position
-
-    # Determine overall number of spaces between origin space and destination space
-    if self.y_position - destination_y < 0
-      overall_difference = (self.y_position - destination_y) * -1
-    else
-      overall_difference = self.y_position - destination_y
-    end
-
-    # Same as above, but with x.  This needs to be equivelant to overall_difference
-    # or move cannot be valid
-    if self.x_position - destination_x < 0
-      overall_difference = (self.x_position - destination_x) * -1
-    else
-      x_overall_difference = self.x_position - destination_x
-    end
-
-    # Determine if move is a valid diagonal move
-    if x_difference == 0 || y_difference == 0 || x_overall_difference != overall_difference
-      return "Turn Method"
-    end
 
     # Determines X Increment
     x_increment = overall_difference / x_difference
@@ -170,23 +162,69 @@ class Piece < ActiveRecord::Base
     iterations = overall_difference - 1
 
     # Counter holds value to add to x during each iteration
-    x_iteration = x_increment
+    x_iteration_count = x_increment
     # Counter holds value to add to y during each iteration
-    y_iteration = y_increment
+    y_iteration_count = y_increment
 
     # Iterate through each space from origin to destination
     # and ensure the spaces are empty
     iterations.times do
-      if board[self.y_position + y_iteration][self.x_position + x_iteration] != nil
+      # nil will be replaced with placeholder piece
+      if board[self.y_position + y_iteration_count][self.x_position + x_iteration_count] != nil
         return "Turn Method"
       end
-      x_iteration += x_increment
-      y_iteration += y_increment
+      x_iteration_count += x_increment
+      y_iteration_count += y_increment
     end
 
     # If no obstructions, return move method to check contents of destination position
     # relocate piece, possibly capture, and update piece coordinates
     return "Move Go!"
+  end
+
+  # Determine if move is a valid horizontal move
+  def horizontal_move_validator(destination_x, destination_y)
+      if destination_y == self.y_position && destination_x != self.x_postion
+        return true
+      else
+        return false
+      end
+  end
+
+  # Determine if move is a valid vertical move
+  def vertical_move_validator(destination_x, destination_y)
+      if destination_x == self.x_position && destination_y != self.y_postion
+        return true
+      else
+        return false
+      end
+  end
+
+  # Determine if move is a valid diagonal move
+  def diagonal_move_validator(destination_x, destination_y)
+      if y_overall_difference == x_overall_difference && y_overall_difference != 0
+        return true
+      else
+        return false
+      end
+    end
+    
+    # Determine overall number of horizontal spaces between x origin and x destination
+    def x_overall_diff(x_destination)
+      if x_destination - self.x_position > 0
+        return x_destination - self.x_position
+      else
+        return = (x_destination - self.x_position) * -1
+      end
+    end
+
+    # Determine overall number of vertical spaces between y origin and y destination
+    def y_overall_diff(y_destination)
+      if y_destination - self.y_position > 0
+        return y_destination - self.y_position
+      else
+        return (y_destination - self.y_position) * -1
+      end
   end
 
 
