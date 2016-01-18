@@ -1,8 +1,9 @@
 <br />
 
 <script>
-  var pieceLocation = ""
+
   var pieceDestination = ""
+
    
     $(function() {
       $( "td" ).hover(
@@ -16,14 +17,26 @@
 
       $( "td" ).click(
         function(event) {
-          pieceLocation = $(event.target).attr('id');
+          var pieceLocation = $(event.target).attr('id');
+          var pieceID = $(event.target).data('piece-id');
           $ ( this ).toggleClass ( 'select_this_cell' ); 
           console.log(pieceLocation);
-          $.post( "pieces#update" ), pieceLocation, function (data) {
+          //alter to put
+          $.post( "/pieces/"+pieceID ), pieceLocation, function (data) {
             console.log(data)
           }
         });      
     });
+
+    $.ajax({
+          type: "POST",
+          url: '/admin/pages/1.json',
+          data: { _method:'PUT', page : {...} },
+          dataType: 'json',
+          success: function(msg) {
+            alert( "Data Saved: " + msg );
+          }
+});
 
 
     // DONE:  Toggle does this automatically. Need to add click method next to select a piece and keep it highlighted, click again deselects
@@ -37,11 +50,13 @@
     // Did a bunch of research tonight and my brain has now melted.  Becuase jQuery runs AFTER the ROR code, the only way to get access to the destination cell ID is to do an AJAX post request.  To do this, I will add a 'confirm move' button that the jQuery will listen for the click.  When the click occurs, this will trigger the AJAX request which will send the origin and destination cell IDs back to the server to update the piece location.  But where do I post to??? An html address?   
 
 
+// nested loops is there a piece in that square
+//get the piece id from the database
 </script>
 
 <table id="Board" width="700px" height="700px">
   <tr id="row_8">
-    <td id="A8" class="black"></td>
+    <td id="A8" class="black"> <%=Piece(3) %></td>
     <td id="B8" class="white"></td>
     <td id="C8" class="black"></td>
     <td id="D8" class="white"></td>

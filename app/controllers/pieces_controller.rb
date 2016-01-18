@@ -1,9 +1,11 @@
 class PiecesController < ApplicationController
 
   def update
+    # Need to listen for AJAX post carrying pieceLocation and pieceDestination
+
     @origin_cell = pieceLocation
     @destination_cell = pieceDestination
-    Piece.find_piece(origin_cell)
+    Piece.find_piece(origin_cell)  #this may become unnecessary once we get the icons on the board
 
 
 
@@ -16,6 +18,17 @@ class PiecesController < ApplicationController
     # false = return alert (move invalid)
 
   end
+
+
+
+
+
+
+
+
+
+
+
 
   # From SO:  http://stackoverflow.com/questions/7237720/jquery-post-to-rails
   # def create
