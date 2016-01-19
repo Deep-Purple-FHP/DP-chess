@@ -40,10 +40,12 @@
 </script>
 
 
+
 <div>
-  <h1> The pawn is at X = <%= @test.x_position %> </h1>
+  <% @test = Pawn.last %>
+  <h1> The pawn is at X = <%= @test.x_position %>, Y = <%= @test.y_position%> </h1>
   <%= image_tag @test.icon %>
-  <h1> the piece is <%= @test2.color %> </h1>
+  <h1> the piece is <%= @test.color %> </h1>
 
 
 </div>
