@@ -1,9 +1,12 @@
 class Piece < ActiveRecord::Base
-  attr_accessor :game_id, :x_position, :y_position, :color, :icon
 
   # Piece < Player < Game < Active Record
   belongs_to :player
   belongs_to :game
+
+  # def self.subclasses
+  #   [Bishop, King, Knight, Pawn, Queen, Rook]
+  # end
 
   # I'm thinking the x,y arrays should be turned into hashes.  Then this table can be searched in reverse.
   # This will be important for the populate board method.
@@ -29,14 +32,6 @@ class Piece < ActiveRecord::Base
   #   {'A8': {0=>7} }, {'B8': {1=>7} }, {'C8': {2=>7} }, {'D8': {3=>7} }, {'E8': {4=>7} }, {'F8': {5=>7} }, {'G8': {6=>7} }, {'H8': {7=>7} },
   # ]
 
-
-  def initialize(game_id:, x_position:, y_position:, color:, icon:)
-    @game_id = game_id
-    @x_position = x_position
-    @y_position = y_position
-    @color = color
-    @icon = icon
-  end
 
   def find_piece(origin_cell)
     #this method should be passed the cell_ID of the piece the user selects via jQuery AJAX post request

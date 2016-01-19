@@ -39,9 +39,17 @@
 
 </script>
 
+
+<div>
+  <h1> The pawn is at X = <%= @test.x_position %> </h1>
+  <%= image_tag @test.icon %>
+  <h1> the piece is <%= @test2.color %> </h1>
+
+
+</div>
 <table id="Board" width="700px" height="700px">
   <tr id="row_8">
-    <td id="A8" class="black"></td>
+    <td id="A8" class="black"><%= image_tag @test.icon %></td>
     <td id="B8" class="white"></td>
     <td id="C8" class="black"></td>
     <td id="D8" class="white"></td>

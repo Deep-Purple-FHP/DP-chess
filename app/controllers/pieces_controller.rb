@@ -1,14 +1,10 @@
 class PiecesController < ApplicationController
 
+
   def update
     @origin_cell = pieceLocation
     @destination_cell = pieceDestination
     Piece.find_piece(origin_cell)
-
-
-
-
-
 
     # receives AJAX post request with piece_location and piece_destination
     # calls the piece move method to determine if valid
@@ -26,3 +22,9 @@ class PiecesController < ApplicationController
   #     render :json => { }, :status => 500
   #   end
   # end
+
+  private
+
+  def piece_params
+    params.require(:piece).permit(:color, :x_position, :y_position, :state, :type, :icon, :game_id)
+  end
