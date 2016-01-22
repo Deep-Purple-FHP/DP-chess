@@ -7,4 +7,6 @@ class Game < ActiveRecord::Base
   def populate_board
     PiecesGenerator.new(self).perform
   end
+
+
 end
