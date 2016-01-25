@@ -57,7 +57,15 @@ class Pawn < Piece
     return false unless type == "Queen" || type == "Knight" || type == "Rook" || type == "Bishop"
     # must be on last row on other side of board
     return false unless promote?
-    self.piece_type = type
+    # Returns true if the piece is a pawn and on the opposite side of the board
+    if self.piece.type ==  "pawn" && self.piece.color == "white" && self.y_position = 7 
+        return true 
+    elsif self.piece.type == "pawn" && self.piece.color == "purple" && self.y_position = 0
+        return true
+    else 
+        return false
+    end
+    self.piece.type = type
     self.set_image
     self.save
     return true
