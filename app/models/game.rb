@@ -5,7 +5,8 @@ class Game < ActiveRecord::Base
   after_create :populate_board
 
   def populate_board
-    PiecesGenerator.new(self).perform
+    PiecesGenerator.new(self).populate_board
+
   end
 
 

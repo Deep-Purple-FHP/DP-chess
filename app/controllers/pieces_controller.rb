@@ -5,11 +5,6 @@ class PiecesController < ApplicationController
     @destination_cell = pieceDestination
     Piece.find_piece(origin_cell)
 
-
-
-
-
-
     # receives AJAX post request with piece_location and piece_destination
     # calls the piece move method to determine if valid
     # true = update view

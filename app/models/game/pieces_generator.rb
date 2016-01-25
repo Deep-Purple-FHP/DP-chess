@@ -1,16 +1,16 @@
 class Game::PiecesGenerator
-  attr_accessor :game
+  attr_accessor :game_id
 
-  def initialize(game)
-    self.game = game
+  def initialize(game_id)
+    self.game_id = game_id
   end
 
   def add_piece(type, x, y, color)
-    game.pieces.create(
+    game_id.pieces.create(
       type: type.to_s.classify,
-      game: self,
+      game_id: self,
       x_position: x, y_position: y, color: color,
-      icon: "#{color}_#{type}.png")
+    icon: "#{color}_#{type}.png")
   end
 
   def populate_white_pieces

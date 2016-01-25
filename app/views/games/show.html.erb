@@ -3,12 +3,12 @@
 <script>
   var pieceLocation = ""
   var pieceDestination = ""
-   
+
     $(function() {
       $( "td" ).hover(
         function() {
           $( this ).addClass( 'highlight_this_cell' );
-        }, 
+        },
 
         function() {
           $( this ).removeClass( 'highlight_this_cell' );
@@ -17,27 +17,64 @@
       $( "td" ).click(
         function(event) {
           pieceLocation = $(event.target).attr('id');
-          $ ( this ).toggleClass ( 'select_this_cell' ); 
+          $ ( this ).toggleClass ( 'select_this_cell' );
           console.log(pieceLocation);
           $.post( "pieces#update" ), pieceLocation, function (data) {
             console.log(data)
           }
-        });      
+        });
     });
+
+
+//Build the board
+
+//Deploy the pieces
+
+
+
 
 
     // DONE:  Toggle does this automatically. Need to add click method next to select a piece and keep it highlighted, click again deselects
 
     // DONE:  Then need to add ability to click on board location to select desired piece location
-        // sub-issue.  ATM, you can still click on yet more squares. 
+        // sub-issue.  ATM, you can still click on yet more squares.
 
-    // pull the cell id when clicked, pass that value to data    
+    // pull the cell id when clicked, pass that value to data
 
     //  Add some logic.  If two squares are selected, trigger alert alert box to confirm move?
-    // Did a bunch of research tonight and my brain has now melted.  Becuase jQuery runs AFTER the ROR code, the only way to get access to the destination cell ID is to do an AJAX post request.  To do this, I will add a 'confirm move' button that the jQuery will listen for the click.  When the click occurs, this will trigger the AJAX request which will send the origin and destination cell IDs back to the server to update the piece location.  But where do I post to??? An html address?   
-
+    // Did a bunch of research tonight and my brain has now melted.  Becuase jQuery runs AFTER the ROR code, the only way to get access to the destination cell ID is to do an AJAX post request.  To do this, I will add a 'confirm move' button that the jQuery will listen for the click.  When the click occurs, this will trigger the AJAX request which will send the origin and destination cell IDs back to the server to update the piece location.  But where do I post to??? An html address?
+    function clickableGrid( rows, cols, callback ){
+      var i=0;
+      var grid = document.createElement('table');
+      grid.className = 'grid';
+      for (var r=0;r<rows;++r){
+        var tr = grid.appendChild(document.createElement('tr'));
+        for (var c=0;c<cols;++c){
+          var cell = tr.appendChild(document.createElement('td'));
+          cell.innerHTML = ++i;
+          cell.addEventListener('click',(function(el,r,c,i){
+            return function(){ callback(el,r,c,i); }
+           })(cell,r,c,i),false);
+        }
+      }
+      return grid;
+    }
 
 </script>
+
+<h1> The pieces in this game include: </h1>
+<% pieces = Piece.where(game_id: 34) %>
+
+<!-- create a row on the board, define each cell -->
+<!-- as each cell is being created, look up if a piece exists in that cell, if so display, if not, return null -->
+
+<div>
+
+<% pieces.each do |p| %>
+
+  <%= image_tag p.icon %>
+<% end %>
+</div>
 
 <table id="Board" width="700px" height="700px">
   <tr id="row_8">
@@ -60,7 +97,7 @@
     <td id="G7" class="black"></td>
     <td id="H7" class="white"></td>
   </tr>
-  <tr id="row_6"> 
+  <tr id="row_6">
     <td id="A6" class="black"></td>
     <td id="B6" class="white"></td>
     <td id="C6" class="black"></td>
@@ -123,4 +160,3 @@
 </table>
 
 <!-- Here we need to place the pieces on the board based on the most recent locations in the piece model  -->
-
