@@ -1,54 +1,46 @@
 class Pawn < Piece
 
-    
-    #Create the board(need: state of whole game)
-    # load all of the pieces of the database
-    # Has to have something that creates all of the pieces
-    # Have a method that populates all of the pieces 
-    # Move method in board(new position, piece)
-    # Check obstructions(same piece, same color,capturing, etc)
-    # Pawn.move(2,3,board)
-    
+
     
     def first_move(dest_x, dest_y)
-         #Deterimine if a pawn is on its original space. 
+    
+    # Determine overall number of horizontal spaces between x origin and x destination
+    x_overall_difference = x_overall_diff(dest_x)
+      
+    # Determine overall number of vertical spaces between y origin and y destination
+    y_overall_difference = y_overall_diff(dest_y)
          
-         if self.player_id == "white"
-         
-             if self.y_position == 6
-                 return true
-             end
+         if self.color == "white" && self.y_position == 1 && y_overall_difference <= 2
+              if vertical_move_validator(dest_x, dest_y)
+                return self.vertical_obstruction_check(dest_x, dest_y, y_overall_difference)
+              end
+                
+         # Pawns can move 2 spaces on their first turn       
+         elsif self.color == "purple" && self.y_position == 6 && y_overall_difference <= 2
+              if vertical_move_validator(dest_x, dest_y)
+                return self.vertical_obstruction_check(dest_x, dest_y, y_overall_difference)
+              end
+        else
+            return false
+
          end
-         
-         if self.player_id == "black"
-            if self.y_position == 1
-                return true
-            end
-        end
+             
         
     end 
     
-    # x and y are the destination coordinates gathered from the board index[y][x]
-    # Black pieces start at 8A and go down while White pieces go up 1A
-    # []
     def legal_move(dest_x,dest_y)
-        if self.color == "black"
-            if dest_y < self.y_position && self.x_position == dest_x 
-                return true
-                
-            else 
-                return false 
-            end
-        end 
-        
-        if self.color == "white"
-            if dest_y > self.y_position && self.x_position == dest_x 
-                return true
-                
-            else 
-                return false 
-            end
-        end 
+
+
+        # Determine overall number of horizontal spaces between x origin and x destination
+        x_overall_difference = x_overall_diff(dest_x)
+          
+        # Determine overall number of vertical spaces between y origin and y destination
+        y_overall_difference = y_overall_diff(dest_y)
+         # Determine if move is a valid vertical move
+         
+        if vertical_move_validator(dest_x, dest_y)
+          return self.vertical_obstruction_check(dest_x, dest_y, y_overall_difference)
+        end
     end 
     
     def promote!(type)

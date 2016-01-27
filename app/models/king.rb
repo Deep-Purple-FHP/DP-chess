@@ -1,23 +1,32 @@
 class King < Piece 
-    def legal_move(dest_x,dest_y)
+
+  def legal_move(dest_x, dest_y)
+
+    # Determine overall number of horizontal spaces between x origin and x destination
+    x_overall_difference = x_overall_diff(dest_x)
       
-      if (dest_x == self.x_position + 1 && dest_y = self.y_position) || (dest_x == self.x_position - 1 && dest_y = self.y_position) || (dest_y == self.y_position + 1 && dest_x = self.x_position) || (dest_y == self.y_position - 1 && dest_x = self.x_position)
-            return true
-     # Diagonal Down to Right
-        elsif dest_x == self.x_position + 1 && dest_y == self.y_position + 1
-            return true
-     # Diagonal Up to Right   
-        elsif dest_x == self.x_position + 1 && dest_y == self.y_position - 1
-            return true
-     # Up to Left   
-        elsif dest_x == self.x_position - 1 && dest_y == self.y_position - 1
-            return true
-     # Down to Left
-        elsif dest_x == self.x_position - 1 && dest_y == self.y_position + 1
-            return true
-            
-        end
-        
-    end 
+    # Determine overall number of vertical spaces between y origin and y destination
+    y_overall_difference = y_overall_diff(dest_y)
+
+  
+    # Determine if move is a valid horizontal move
+    if horizontal_move_validator(dest_x, dest_y)
+      return self.horizontal_obstruction_check(dest_x, dest_y, x_overall_difference)  if x_overall_difference == 1
+
+    # Determine if move is a valid vertical move
+    elsif vertical_move_validator(dest_x, dest_y) 
+
+      return self.vertical_obstruction_check(dest_x, dest_y, y_overall_difference) if y_overall_difference == 1
+
+    # Determine if move is a valid diagonal move
+    elsif diagonal_move_validator(dest_x, dest_y)
+        return self.diagonal_obstruction_check(dest_x, dest_y, y_overall_difference) if y_overall_difference == 1 && x_overall_difference == 1
+
+    # If move is not valid, return "Turn Method"
+    else
+      return "Turn Method"
+    end
+
+  end
     
 end
