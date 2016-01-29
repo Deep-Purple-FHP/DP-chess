@@ -5,7 +5,7 @@ DPChess::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
-  resources :dashboards, :only => [:show]
+  resource :dashboard, :only => [:show]
   resources :games
   resources :pieces
 
