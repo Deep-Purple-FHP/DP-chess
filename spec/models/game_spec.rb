@@ -23,4 +23,8 @@ RSpec.describe Game::PiecesGenerator do
     expect(pieces['Pieces::Queen']).to eq(2)
     expect(pieces['Pieces::King']).to eq(2)
   end
+
+  it 'has 32 pieces in the initial position for a chess game' do
+    pending
+  end
 end

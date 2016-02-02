@@ -1,8 +1,26 @@
 class Pieces::Pawn < Pieces::Base
 
-  validate :valid_move?
-
   def valid_move?
+    # TODO: Test initial position
+    return if new_record?
+    return if moved_forward?(1)
+
+    errors.add(:base, 'invalid move')
+  end
+
+  def moved_forward?(n = 1)
+    return false unless changes['y_position']
+
+    before, after = changes['y_position']
+    if black?
+      after == before - n
+    else
+      after == before + n
+    end
+  end
+
+  def black?
+    color == 'purple'
   end
 
   def first_move(dest_x, dest_y)

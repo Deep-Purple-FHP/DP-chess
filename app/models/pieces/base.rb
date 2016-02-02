@@ -5,6 +5,18 @@ class Pieces::Base < ActiveRecord::Base
   belongs_to :player
   belongs_to :game
 
+  scope :black, -> { where(color: 'purple') }
+  scope :white, -> { where(color: 'white') }
+
+  validate :valid_move?
+
+  def valid_move?
+  end
+
+  def black?
+    color == 'purple'
+  end
+
   def convert_string_location_to_coords(str)
     [%w(A B C D E F G H).index(str[0]), (str[1].to_i - 1)]
   end
