@@ -1,4 +1,4 @@
-class King < Pieces::Base 
+class Pieces::King < Pieces::Base 
 
   def legal_move(dest_x, dest_y)
 

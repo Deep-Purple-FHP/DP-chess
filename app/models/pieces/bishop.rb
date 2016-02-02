@@ -1,4 +1,4 @@
-class Bishop < Pieces::Base 
+class Pieces::Bishop < Pieces::Base 
     def legal_move(dest_x, dest_y)
     
     # Determine overall number of horizontal spaces between x origin and x destination

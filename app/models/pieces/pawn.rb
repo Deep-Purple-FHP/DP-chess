@@ -1,4 +1,6 @@
-class Pawn < Pieces::Base
+class Pieces::Pawn < Pieces::Base
+
+  validate :valid_move?
 
   def valid_move?
   end

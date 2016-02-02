@@ -1,4 +1,4 @@
-class Rook < Pieces::Base 
+class Pieces::Rook < Pieces::Base 
 
   def legal_move(dest_x, dest_y)
 

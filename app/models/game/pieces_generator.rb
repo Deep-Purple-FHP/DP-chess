@@ -7,7 +7,7 @@ class Game::PiecesGenerator
 
   def add_piece(type, x, y, color)
     game_id.pieces.create(
-      type: type.to_s.classify,
+      type: "Pieces::#{type.to_s.classify}",
       game_id: self,
       x_position: x, y_position: y, color: color,
     icon: "#{color}_#{type}.png")

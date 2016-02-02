@@ -1,4 +1,4 @@
-class Queen < Pieces::Base
+class Pieces::Queen < Pieces::Base
 
   def legal_move(dest_x, dest_y)
 
