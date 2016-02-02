@@ -60,3 +60,18 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+
+group :development do
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-bundler', require: false
+  gem 'guard-shell', require: false
+  gem 'rack-livereload'
+  gem 'guard-spring'
+  gem 'guard-rake'
+  gem 'pry-rails'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
+  gem 'parallel_tests'
+end
