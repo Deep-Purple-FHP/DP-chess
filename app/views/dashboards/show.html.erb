@@ -10,7 +10,7 @@ can access it to view from here -->
 	<h2>All Public games</h2>
 	<% @games.each do |game| %>
 		<table>
-			<tr><%= link_to game.name, '#' %></tr>
+			<tr><%= link_to game.name, game_path(game) %></tr>
 		</table>
 	<% end %>
 </div>
@@ -19,8 +19,8 @@ can access it to view from here -->
 	<h2>Games with seats available</h2>
 	<i>Click to Join</i><br />
 	<% if @opengames.nil? %>
-		<b>No open games. Click below to create game</b>
-		<%= link_to 'Create New Game', '#', :class => 'btn btn-primary' %>
+		<b>No open games. Click below to Create New Game</b>
+		<%= link_to 'Create New Game', games_path, :method => :post, :class => 'btn btn-primary' %>
 	<% else %>
 		<% @opengames.each do |game| %>
 		<table>
@@ -41,8 +41,9 @@ can access it to view from here -->
 		</h3>
 		<br />
 	<%# end %>
-	<%= link_to 'Create New Game', '#', :class => 'btn btn-primary' %>
+	<%= link_to 'Create New Game', new_game_path, :class => 'btn btn-primary' %>
 </div>
+
 
 <br class="clr" />
 
