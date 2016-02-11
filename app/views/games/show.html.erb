@@ -23,6 +23,7 @@
             console.log(data)
           }
         });
+
     });
 
 
@@ -43,119 +44,120 @@
 
     //  Add some logic.  If two squares are selected, trigger alert alert box to confirm move?
     // Did a bunch of research tonight and my brain has now melted.  Becuase jQuery runs AFTER the ROR code, the only way to get access to the destination cell ID is to do an AJAX post request.  To do this, I will add a 'confirm move' button that the jQuery will listen for the click.  When the click occurs, this will trigger the AJAX request which will send the origin and destination cell IDs back to the server to update the piece location.  But where do I post to??? An html address?
-    function clickableGrid( rows, cols, callback ){
-      var i=0;
-      var grid = document.createElement('table');
-      grid.className = 'grid';
-      for (var r=0;r<rows;++r){
-        var tr = grid.appendChild(document.createElement('tr'));
-        for (var c=0;c<cols;++c){
-          var cell = tr.appendChild(document.createElement('td'));
-          cell.innerHTML = ++i;
-          cell.addEventListener('click',(function(el,r,c,i){
-            return function(){ callback(el,r,c,i); }
-           })(cell,r,c,i),false);
-        }
-      }
-      return grid;
-    }
+    // function clickableGrid( rows, cols, callback ){
+    //   var i=0;
+    //   var grid = document.createElement('table');
+    //   grid.className = 'grid';
+    //   for (var r=0;r<rows;++r){
+    //     var tr = grid.appendChild(document.createElement('tr'));
+    //     for (var c=0;c<cols;++c){
+    //       var cell = tr.appendChild(document.createElement('td'));
+    //       cell.innerHTML = ++i;
+    //       cell.addEventListener('click',(function(el,r,c,i){
+    //         return function(){ callback(cell,r,c,i); }
+    //        })(cell,r,c,i),false);
+    //     }
+    //   }
+    //   return grid;
+    // }
 
 </script>
 
-<h1> The pieces in this game include: </h1>
-<% pieces = Piece.where(game_id: 34) %>
+
+<% occupant = @game.pieces.find_by(x_position: 0, y_position: 7) %>
 
 <!-- create a row on the board, define each cell -->
 <!-- as each cell is being created, look up if a piece exists in that cell, if so display, if not, return null -->
 
-<div>
-
-<% pieces.each do |p| %>
-
-  <%= image_tag p.icon %>
-<% end %>
-</div>
+<% def display_piece(cell_id)
+  x = %w(A B C D E F G H).index(cell_id[0])
+  y = (cell_id[1].to_i - 1)
+  occupant = @game.pieces.find_by(x_position: x, y_position: y)
+    if occupant != nil
+      image_tag occupant.icon
+    end
+  end %>
 
 <table id="Board" width="700px" height="700px">
   <tr id="row_8">
-    <td id="A8" class="black"></td>
-    <td id="B8" class="white"></td>
-    <td id="C8" class="black"></td>
-    <td id="D8" class="white"></td>
-    <td id="E8" class="black"></td>
-    <td id="F8" class="white"></td>
-    <td id="G8" class="black"></td>
-    <td id="H8" class="white"></td>
+    <td id="A8" class="black" img class = "autoResizeImage"> <%= display_piece("A8") %> </td>
+    <td id="B8" class="white" img class = "autoResizeImage"> <%= display_piece("B8") %> </td>
+    <td id="C8" class="black" img class = "autoResizeImage"> <%= display_piece("C8") %> </td>
+    <td id="D8" class="white" img class = "autoResizeImage"> <%= display_piece("D8") %> </td>
+    <td id="E8" class="black" img class = "autoResizeImage"> <%= display_piece("E8") %> </td>
+    <td id="F8" class="white" img class = "autoResizeImage"> <%= display_piece("F8") %> </td>
+    <td id="G8" class="black" img class = "autoResizeImage"> <%= display_piece("G8") %> </td>
+    <td id="H8" class="white" img class = "autoResizeImage"> <%= display_piece("H8") %> </td>
   </tr>
   <tr id="row_7">
-    <td id="A7" class="black"></td>
-    <td id="B7" class="white"></td>
-    <td id="C7" class="black"></td>
-    <td id="D7" class="white"></td>
-    <td id="E7" class="black"></td>
-    <td id="F7" class="white"></td>
-    <td id="G7" class="black"></td>
-    <td id="H7" class="white"></td>
+    <td id="A7" class="black" img class = "autoResizeImage"> <%= display_piece("A7") %> </td>
+    <td id="B7" class="white" img class = "autoResizeImage"> <%= display_piece("B7") %> </td>
+    <td id="C7" class="black" img class = "autoResizeImage"> <%= display_piece("C7") %> </td>
+    <td id="D7" class="white" img class = "autoResizeImage"> <%= display_piece("D7") %> </td>
+    <td id="E7" class="black" img class = "autoResizeImage"> <%= display_piece("E7") %> </td>
+    <td id="F7" class="white" img class = "autoResizeImage"> <%= display_piece("F7") %> </td>
+    <td id="G7" class="black" img class = "autoResizeImage"> <%= display_piece("G7") %> </td>
+    <td id="H7" class="white" img class = "autoResizeImage"> <%= display_piece("H7") %> </td>
   </tr>
   <tr id="row_6">
-    <td id="A6" class="black"></td>
-    <td id="B6" class="white"></td>
-    <td id="C6" class="black"></td>
-    <td id="D6" class="white"></td>
-    <td id="E6" class="black"></td>
-    <td id="F6" class="white"></td>
-    <td id="G6" class="black"></td>
-    <td id="H6" class="white"></td>
+    <td id="A6" class="black" img class = "autoResizeImage"> <%= display_piece("A6") %> </td>
+    <td id="B6" class="white" img class = "autoResizeImage"> <%= display_piece("B6") %> </td>
+    <td id="C6" class="black" img class = "autoResizeImage"> <%= display_piece("C6") %> </td>
+    <td id="D6" class="white" img class = "autoResizeImage"> <%= display_piece("D6") %> </td>
+    <td id="E6" class="black" img class = "autoResizeImage"> <%= display_piece("E6") %> </td>
+    <td id="F6" class="white" img class = "autoResizeImage"> <%= display_piece("F6") %> </td>
+    <td id="G6" class="black" img class = "autoResizeImage"> <%= display_piece("G6") %> </td>
+    <td id="H6" class="white" img class = "autoResizeImage"> <%= display_piece("H6") %> </td>
   </tr>
   <tr id="row_5">
-    <td id="A5" class="black"></td>
-    <td id="B5" class="white"></td>
-    <td id="C5" class="black"></td>
-    <td id="D5" class="white"></td>
-    <td id="E5" class="black"></td>
-    <td id="F5" class="white"></td>
-    <td id="G5" class="black"></td>
-    <td id="H5" class="white"></td>
+    <td id="A5" class="black" img class = "autoResizeImage"> <%= display_piece("A5") %> </td>
+    <td id="B5" class="white" img class = "autoResizeImage"> <%= display_piece("B5") %> </td>
+    <td id="C5" class="black" img class = "autoResizeImage"> <%= display_piece("C5") %> </td>
+    <td id="D5" class="white" img class = "autoResizeImage"> <%= display_piece("D5") %> </td>
+    <td id="E5" class="black" img class = "autoResizeImage"> <%= display_piece("E5") %> </td>
+    <td id="F5" class="white" img class = "autoResizeImage"> <%= display_piece("F5") %> </td>
+    <td id="G5" class="black" img class = "autoResizeImage"> <%= display_piece("G5") %> </td>
+    <td id="H5" class="white" img class = "autoResizeImage"> <%= display_piece("H5") %> </td>
   </tr>
   <tr id="row_4">
-    <td id="A4" class="black"></td>
-    <td id="B4" class="white"></td>
-    <td id="C4" class="black"></td>
-    <td id="D4" class="white"></td>
-    <td id="E4" class="black"></td>
-    <td id="F4" class="white"></td>
-    <td id="G4" class="black"></td>
-    <td id="H4" class="white"></td>
+    <td id="A4" class="black" img class = "autoResizeImage"> <%= display_piece("A4") %> </td>
+    <td id="B4" class="white" img class = "autoResizeImage"> <%= display_piece("B4") %> </td>
+    <td id="C4" class="black" img class = "autoResizeImage"> <%= display_piece("C4") %> </td>
+    <td id="D4" class="white" img class = "autoResizeImage"> <%= display_piece("D4") %> </td>
+    <td id="E4" class="black" img class = "autoResizeImage"> <%= display_piece("E4") %> </td>
+    <td id="F4" class="white" img class = "autoResizeImage"> <%= display_piece("F4") %> </td>
+    <td id="G4" class="black" img class = "autoResizeImage"> <%= display_piece("G4") %> </td>
+    <td id="H4" class="white" img class = "autoResizeImage"> <%= display_piece("H4") %> </td>
   </tr>
   <tr id="row_3">
-    <td id="A3" class="black"></td>
-    <td id="B3" class="white"></td>
-    <td id="C3" class="black"></td>
-    <td id="D3" class="white"></td>
-    <td id="E3" class="black"></td>
-    <td id="F3" class="white"></td>
-    <td id="G3" class="black"></td>
-    <td id="H3" class="white"></td>
+    <td id="A3" class="black" img class = "autoResizeImage"> <%= display_piece("A3") %> </td>
+    <td id="B3" class="white" img class = "autoResizeImage"> <%= display_piece("B3") %> </td>
+    <td id="C3" class="black" img class = "autoResizeImage"> <%= display_piece("C3") %> </td>
+    <td id="D3" class="white" img class = "autoResizeImage"> <%= display_piece("D3") %> </td>
+    <td id="E3" class="black" img class = "autoResizeImage"> <%= display_piece("E3") %> </td>
+    <td id="F3" class="white" img class = "autoResizeImage"> <%= display_piece("F3") %> </td>
+    <td id="G3" class="black" img class = "autoResizeImage"> <%= display_piece("G3") %> </td>
+    <td id="H3" class="white" img class = "autoResizeImage"> <%= display_piece("H3") %> </td>
   </tr>
   <tr id="row_2">
-    <td id="A2" class="black"></td>
-    <td id="B2" class="white"></td>
-    <td id="C2" class="black"></td>
-    <td id="D2" class="white"></td>
-    <td id="E2" class="black"></td>
-    <td id="F2" class="white"></td>
-    <td id="G2" class="black"></td>
-    <td id="H2" class="white"></td>
+    <td id="A2" class="black" img class = "autoResizeImage"> <%= display_piece("A2") %> </td>
+    <td id="B2" class="white" img class = "autoResizeImage"> <%= display_piece("B2") %> </td>
+    <td id="C2" class="black" img class = "autoResizeImage"> <%= display_piece("C2") %> </td>
+    <td id="D2" class="white" img class = "autoResizeImage"> <%= display_piece("D2") %> </td>
+    <td id="E2" class="black" img class = "autoResizeImage"> <%= display_piece("E2") %> </td>
+    <td id="F2" class="white" img class = "autoResizeImage"> <%= display_piece("F2") %> </td>
+    <td id="G2" class="black" img class = "autoResizeImage"> <%= display_piece("G2") %> </td>
+    <td id="H2" class="white" img class = "autoResizeImage"> <%= display_piece("H2") %> </td>
   </tr>
   <tr id="row_1">
-    <td id="A1" class="black"></td>
-    <td id="B1" class="white"></td>
-    <td id="C1" class="black"></td>
-    <td id="D1" class="white"></td>
-    <td id="E1" class="black"></td>
-    <td id="F1" class="white"></td>
-    <td id="G1" class="black"></td>
-    <td id="H1" class="white"></td>
+    <td id="A1" class="black" img class = "autoResizeImage"> <%= display_piece("A1") %> </td>
+    <td id="B1" class="white" img class = "autoResizeImage"> <%= display_piece("B1") %> </td>
+    <td id="C1" class="black" img class = "autoResizeImage"> <%= display_piece("C1") %> </td>
+    <td id="D1" class="white" img class = "autoResizeImage"> <%= display_piece("D1") %> </td>
+    <td id="E1" class="black" img class = "autoResizeImage"> <%= display_piece("E1") %> </td>
+    <td id="F1" class="white" img class = "autoResizeImage"> <%= display_piece("F1") %> </td>
+    <td id="G1" class="black" img class = "autoResizeImage"> <%= display_piece("G1") %> </td>
+    <td id="H1" class="white" img class = "autoResizeImage"> <%= display_piece("H1") %> </td>
   </tr>
 </table>
 
