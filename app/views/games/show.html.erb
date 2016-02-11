@@ -5,19 +5,19 @@
   var pieceDestination = ""
 
     $(function() {
-      $( "td" ).hover(
-        function() {
-          $( this ).addClass( 'highlight_this_cell' );
-        },
-
-        function() {
-          $( this ).removeClass( 'highlight_this_cell' );
-         });
+      // $( "td" ).hover(
+      //   function() {
+      //     $( this ).addClass( 'highlight_this_cell' );
+      //   },
+      //
+      //   function() {
+      //     $( this ).removeClass( 'highlight_this_cell' );
+      //    });
 
       $( "td" ).click(
         function(event) {
-          pieceLocation = $(event.target).attr('id');
-          $ ( this ).toggleClass ( 'select_this_cell' );
+          pieceLocation = $(event.target).attr('x_location');
+          $ ( this ).draggable ();
           console.log(pieceLocation);
           $.post( "pieces#update" ), pieceLocation, function (data) {
             console.log(data)
@@ -154,10 +154,10 @@
     <td id="B1" class="white" img class = "autoResizeImage"> <%= display_piece("B1") %> </td>
     <td id="C1" class="black" img class = "autoResizeImage"> <%= display_piece("C1") %> </td>
     <td id="D1" class="white" img class = "autoResizeImage"> <%= display_piece("D1") %> </td>
-    <td id="E1" class="black" img class = "autoResizeImage"> <%= display_piece("E1") %> </td>
-    <td id="F1" class="white" img class = "autoResizeImage"> <%= display_piece("F1") %> </td>
-    <td id="G1" class="black" img class = "autoResizeImage"> <%= display_piece("G1") %> </td>
-    <td id="H1" class="white" img class = "autoResizeImage"> <%= display_piece("H1") %> </td>
+    <td id="E1" class="black" img class = "autoResizeImage"> <%= display_piece("E1") %> ></td>
+    <td id="F1" class="white" img class = "autoResizeImage"> <%= display_piece("F1") %> ></td>
+    <td id="G1" class="black" img class = "autoResizeImage"> <%= display_piece("G1") %> ></td>
+    <td id="H1" class="white" img class = "autoResizeImage"> <%= display_piece("H1") %> ></td>
   </tr>
 </table>
 
