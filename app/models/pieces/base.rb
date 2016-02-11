@@ -1,25 +1,25 @@
 class Pieces::Base < Piece
 
+  # Piece < Player < Game < Active Record
   belongs_to :player
   belongs_to :game
 
+  def something
+      "A8"
+  end
+
   def convert_string_location_to_coords(str)
-    x = [%w(A B C D E F G H).index(str[0])]
-    y = [(str[1].to_i - 1)]
-    coordinates = [x,y]
-    return coordinates
+    [%w(A B C D E F G H).index(str[0]), (str[1].to_i - 1)]
   end
 
 
-  def display_piece(table_cell)
-    convert_string_location_to_coords(table_cell)
-    # game.pieces.find_by(x_position: x, y_position: y).pluck(:id)
-    x = coordinates[0]
-    y = coordinates[1]
-    occupant = game.pieces.find_by(x_position: x, y_position: y)
-    if occupant != nil
-      return image_tag occupant.icon
-    end
+  def display_piece(cell_id)
+    x = [%w(A B C D E F G H).index(cell_id[0])
+    y = (cell_id[1].to_i - 1)]
+    occupant = @game.pieces.find_by(x_position: x, y_position: y)
+      if occupant != nil
+        image_tag occupant.icon
+      end
   end
 
   def capture
@@ -65,7 +65,7 @@ class Pieces::Base < Piece
     # Iterate through each space from origin to destination
     # and ensure the spaces are empty
     iterations.times do
-      # nil will be replaced with placeholder piece
+        # nil will be replaced with placeholder piece
       if board[self.y_position + y_iteration_count][self.x_position] != nil
         return "Turn Method"
       end
@@ -96,7 +96,7 @@ class Pieces::Base < Piece
     # Iterate through each space from origin to destination
     # and ensure the spaces are empty
     iterations.times do
-      # nil will be replaced with placeholder piece
+        # nil will be replaced with placeholder piece
       if board[self.y_position][self.x_position + x_iteration_count] != nil
         return "Turn Method"
       end
@@ -151,32 +151,32 @@ class Pieces::Base < Piece
 
   # Determine if move is a valid horizontal move
   def horizontal_move_validator(destination_x, destination_y)
-    if destination_y == self.y_position && destination_x != self.x_postion
-      return true
-    else
-      return false
-    end
+      if destination_y == self.y_position && destination_x != self.x_postion
+        return true
+      else
+        return false
+      end
   end
 
   # Determine if move is a valid vertical move
   def vertical_move_validator(destination_x, destination_y)
-    if destination_x == self.x_position && destination_y != self.y_postion
-      return true
-    else
-      return false
-    end
+      if destination_x == self.x_position && destination_y != self.y_postion
+        return true
+      else
+        return false
+      end
   end
 
   # Determine if move is a valid diagonal move
   def diagonal_move_validator(destination_x, destination_y)
-    if y_overall_difference == x_overall_difference && y_overall_difference != 0
-      return true
-    else
-      return false
-    end
+      if y_overall_difference == x_overall_difference && y_overall_difference != 0
+        return true
+      else
+        return false
+      end
   end
 
-  # Determine overall number of horizontal spaces between x origin and x destination
+    # Determine overall number of horizontal spaces between x origin and x destination
   def x_overall_diff(x_destination)
     if x_destination - self.x_position > 0
       return x_destination - self.x_position
@@ -193,9 +193,4 @@ class Pieces::Base < Piece
       return (y_destination - self.y_position) * -1
     end
   end
-
-
-
-
-
 end
