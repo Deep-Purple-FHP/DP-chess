@@ -5,19 +5,19 @@
   var pieceDestination = ""
 
     $(function() {
-      // $( "td" ).hover(
-      //   function() {
-      //     $( this ).addClass( 'highlight_this_cell' );
-      //   },
-      //
-      //   function() {
-      //     $( this ).removeClass( 'highlight_this_cell' );
-      //    });
+      $( "td" ).hover(
+        function() {
+          $( this ).addClass( 'highlight_this_cell' );
+        },
+
+        function() {
+          $( this ).removeClass( 'highlight_this_cell' );
+         });
 
       $( "td" ).click(
         function(event) {
-          pieceLocation = $(event.target).attr('x_location');
-          $ ( this ).draggable ();
+          pieceLocation = $(event.target).attr('id');
+          $ ( this ).toggleClass ( 'select_this_cell' );
           console.log(pieceLocation);
           $.post( "pieces#update" ), pieceLocation, function (data) {
             console.log(data)
@@ -26,48 +26,7 @@
 
     });
 
-
-//Build the board
-
-//Deploy the pieces
-
-
-
-
-
-    // DONE:  Toggle does this automatically. Need to add click method next to select a piece and keep it highlighted, click again deselects
-
-    // DONE:  Then need to add ability to click on board location to select desired piece location
-        // sub-issue.  ATM, you can still click on yet more squares.
-
-    // pull the cell id when clicked, pass that value to data
-
-    //  Add some logic.  If two squares are selected, trigger alert alert box to confirm move?
-    // Did a bunch of research tonight and my brain has now melted.  Becuase jQuery runs AFTER the ROR code, the only way to get access to the destination cell ID is to do an AJAX post request.  To do this, I will add a 'confirm move' button that the jQuery will listen for the click.  When the click occurs, this will trigger the AJAX request which will send the origin and destination cell IDs back to the server to update the piece location.  But where do I post to??? An html address?
-    // function clickableGrid( rows, cols, callback ){
-    //   var i=0;
-    //   var grid = document.createElement('table');
-    //   grid.className = 'grid';
-    //   for (var r=0;r<rows;++r){
-    //     var tr = grid.appendChild(document.createElement('tr'));
-    //     for (var c=0;c<cols;++c){
-    //       var cell = tr.appendChild(document.createElement('td'));
-    //       cell.innerHTML = ++i;
-    //       cell.addEventListener('click',(function(el,r,c,i){
-    //         return function(){ callback(cell,r,c,i); }
-    //        })(cell,r,c,i),false);
-    //     }
-    //   }
-    //   return grid;
-    // }
-
 </script>
-
-
-<% occupant = @game.pieces.find_by(x_position: 0, y_position: 7) %>
-
-<!-- create a row on the board, define each cell -->
-<!-- as each cell is being created, look up if a piece exists in that cell, if so display, if not, return null -->
 
 <% def display_piece(cell_id)
   x = %w(A B C D E F G H).index(cell_id[0])
@@ -154,10 +113,10 @@
     <td id="B1" class="white" img class = "autoResizeImage"> <%= display_piece("B1") %> </td>
     <td id="C1" class="black" img class = "autoResizeImage"> <%= display_piece("C1") %> </td>
     <td id="D1" class="white" img class = "autoResizeImage"> <%= display_piece("D1") %> </td>
-    <td id="E1" class="black" img class = "autoResizeImage"> <%= display_piece("E1") %> ></td>
-    <td id="F1" class="white" img class = "autoResizeImage"> <%= display_piece("F1") %> ></td>
-    <td id="G1" class="black" img class = "autoResizeImage"> <%= display_piece("G1") %> ></td>
-    <td id="H1" class="white" img class = "autoResizeImage"> <%= display_piece("H1") %> ></td>
+    <td id="E1" class="black" img class = "autoResizeImage"> <%= display_piece("E1") %> </td>
+    <td id="F1" class="white" img class = "autoResizeImage"> <%= display_piece("F1") %> </td>
+    <td id="G1" class="black" img class = "autoResizeImage"> <%= display_piece("G1") %> </td>
+    <td id="H1" class="white" img class = "autoResizeImage"> <%= display_piece("H1") %> </td>
   </tr>
 </table>
 
