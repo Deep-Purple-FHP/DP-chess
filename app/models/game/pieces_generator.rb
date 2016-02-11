@@ -1,6 +1,8 @@
 class Game::PiecesGenerator
   attr_accessor :game_id
 
+
+
   def initialize(game_id)
     self.game_id = game_id
   end

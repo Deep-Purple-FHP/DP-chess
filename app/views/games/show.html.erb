@@ -43,30 +43,34 @@
 
     //  Add some logic.  If two squares are selected, trigger alert alert box to confirm move?
     // Did a bunch of research tonight and my brain has now melted.  Becuase jQuery runs AFTER the ROR code, the only way to get access to the destination cell ID is to do an AJAX post request.  To do this, I will add a 'confirm move' button that the jQuery will listen for the click.  When the click occurs, this will trigger the AJAX request which will send the origin and destination cell IDs back to the server to update the piece location.  But where do I post to??? An html address?
-    function clickableGrid( rows, cols, callback ){
-      var i=0;
-      var grid = document.createElement('table');
-      grid.className = 'grid';
-      for (var r=0;r<rows;++r){
-        var tr = grid.appendChild(document.createElement('tr'));
-        for (var c=0;c<cols;++c){
-          var cell = tr.appendChild(document.createElement('td'));
-          cell.innerHTML = ++i;
-          cell.addEventListener('click',(function(el,r,c,i){
-            return function(){ callback(el,r,c,i); }
-           })(cell,r,c,i),false);
-        }
-      }
-      return grid;
-    }
+    // function clickableGrid( rows, cols, callback ){
+    //   var i=0;
+    //   var grid = document.createElement('table');
+    //   grid.className = 'grid';
+    //   for (var r=0;r<rows;++r){
+    //     var tr = grid.appendChild(document.createElement('tr'));
+    //     for (var c=0;c<cols;++c){
+    //       var cell = tr.appendChild(document.createElement('td'));
+    //       cell.innerHTML = ++i;
+    //       cell.addEventListener('click',(function(el,r,c,i){
+    //         return function(){ callback(cell,r,c,i); }
+    //        })(cell,r,c,i),false);
+    //     }
+    //   }
+    //   return grid;
+    // }
 
 </script>
 
 <h1> The pieces in this game include: </h1>
-<% pieces = Piece.where(game_id: 34) %>
+
+<% pieces = Piece.where(game_id: 50) %>
+<% occupant = pieces.find_by(x_position: 0, y_position: 7) %>
+<br />
 
 <!-- create a row on the board, define each cell -->
 <!-- as each cell is being created, look up if a piece exists in that cell, if so display, if not, return null -->
+
 
 <div>
 
@@ -76,9 +80,13 @@
 <% end %>
 </div>
 
+
+
+
+
 <table id="Board" width="700px" height="700px">
   <tr id="row_8">
-    <td id="A8" class="black"></td>
+    <td id="A8" class="black" img class = "autoResizeImage"> <%= image_tag occupant.icon %>  </td>
     <td id="B8" class="white"></td>
     <td id="C8" class="black"></td>
     <td id="D8" class="white"></td>

@@ -7,6 +7,10 @@
 .select_this_cell{
     background-color: rgba(255, 255, 77, 0.7);
 }
+.grid {
+  color: black;
+
+}
 
 /*end javascript styles*/
 
@@ -61,8 +65,16 @@
   background-size: contain;
 }
 
+.autoResizeImage {
+  horizontal-align: middle;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .black, .white {
-  width:12.5%;
+  width: 80px;
+  height: 80px;
 }
 
 .dash {
