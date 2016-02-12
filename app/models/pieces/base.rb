@@ -4,19 +4,14 @@ class Pieces::Base < Piece
   belongs_to :player
   belongs_to :game
 
-  def something
-      "A8"
-  end
-
   def convert_string_location_to_coords(str)
     [%w(A B C D E F G H).index(str[0]), (str[1].to_i - 1)]
   end
 
 
-  def display_piece(cell_id)
-    x = [%w(A B C D E F G H).index(cell_id[0])
-    y = (cell_id[1].to_i - 1)]
-    occupant = @game.pieces.find_by(x_position: x, y_position: y)
+  def display_piece(origin_cell)
+    # game.pieces.find_by(x_position: x, y_position: y).pluck(:id)
+    occupant = game.pieces.find_by(x_position: x, y_position: y)
       if occupant != nil
         image_tag occupant.icon
       end
@@ -174,23 +169,28 @@ class Pieces::Base < Piece
       else
         return false
       end
-  end
+    end
 
     # Determine overall number of horizontal spaces between x origin and x destination
-  def x_overall_diff(x_destination)
-    if x_destination - self.x_position > 0
-      return x_destination - self.x_position
-    else
-      return (x_destination - self.x_position) * -1
+    def x_overall_diff(x_destination)
+      if x_destination - self.x_position > 0
+        return x_destination - self.x_position
+      else
+        return (x_destination - self.x_position) * -1
+      end
     end
+
+    # Determine overall number of vertical spaces between y origin and y destination
+    def y_overall_diff(y_destination)
+      if y_destination - self.y_position > 0
+        return y_destination - self.y_position
+      else
+        return (y_destination - self.y_position) * -1
+      end
   end
 
-  # Determine overall number of vertical spaces between y origin and y destination
-  def y_overall_diff(y_destination)
-    if y_destination - self.y_position > 0
-      return y_destination - self.y_position
-    else
-      return (y_destination - self.y_position) * -1
-    end
-  end
+
+
+
+
 end
