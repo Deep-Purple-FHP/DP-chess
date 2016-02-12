@@ -1,39 +1,48 @@
 <br />
 
 <script>
-  var pieceLocation = ""
-  var pieceDestination = ""
 
-    $(function() {
-      $( "td" ).hover(
-        function() {
-          $( this ).addClass( 'highlight_this_cell' );
-        },
 
-        function() {
-          $( this ).removeClass( 'highlight_this_cell' );
-         });
-
-      $( "td" ).click(
-        function(event) {
-          pieceLocation = $(event.target).attr('id');
-          $ ( this ).toggleClass ( 'select_this_cell' );
-          console.log(pieceLocation);
-          $.post( "pieces#update" ), pieceLocation, function (data) {
-            console.log(data)
-          }
-        });
-
+  $(function() {
+    $( "img" ).draggable({ grid: [ 80, 80 ] });
+    $( "td" ).droppable({
+      drop: function( event, ui ) {
+        destination = $(event.target).attr('id');
+          console.log(destination);
+      }
     });
+  });
+
+    // $(function() {
+      // $( "td" ).hover(
+      //   function() {
+      //     $( this ).addClass( 'highlight_this_cell' );
+      //   },
+      //
+      //   function() {
+      //     $( this ).removeClass( 'highlight_this_cell' );
+      //    });
+
+      // $( "img" ).click(
+      //   function(event) {
+      //     piece = $(event.target).attr('id');
+      //     $ ( this ).toggleClass ( 'select_this_cell' );
+      //     console.log(piece);
+      //     // $.post( "pieces#update" ), pieceLocation, function (data) {
+      //     //   console.log(data)
+      //     // }
+      //   });
+
+    // });
 
 </script>
 
 <% def display_piece(cell_id)
   x = %w(A B C D E F G H).index(cell_id[0])
   y = (cell_id[1].to_i - 1)
-  occupant = @game.pieces.find_by(x_position: x, y_position: y)
-    if occupant != nil
-      image_tag occupant.icon
+  @occupant = @game.pieces.find_by(x_position: x, y_position: y)
+    if @occupant != nil
+      image_tag @occupant.icon
     end
   end %>
 

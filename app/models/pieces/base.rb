@@ -5,7 +5,7 @@ class Pieces::Base < Piece
   belongs_to :game
 
   def something
-      "A8"
+      "A7"
   end
 
   def convert_string_location_to_coords(str)
