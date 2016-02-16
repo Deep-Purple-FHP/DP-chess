@@ -75,3 +75,6 @@ group :development do
   gem 'pry-stack_explorer'
   gem 'parallel_tests'
 end
+
+gem 'rabl'
+gem 'oj'

@@ -117,6 +117,7 @@ GEM
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oj (2.14.3)
     orm_adapter (0.5.0)
     parallel (1.6.1)
     parallel_tests (2.2.2)
@@ -135,6 +136,8 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
+    rabl (0.11.7)
+      activesupport (>= 2.3.14)
     rack (1.5.5)
     rack-livereload (0.3.16)
       rack
@@ -236,11 +239,13 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
+  oj
   parallel_tests
   pg
   pry-rails
   pry-rescue
   pry-stack_explorer
+  rabl
   rack-livereload
   rails (= 4.0.1)
   rspec-rails (~> 3.0)
