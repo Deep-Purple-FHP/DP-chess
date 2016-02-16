@@ -14,6 +14,15 @@
           $( this ).removeClass( 'highlight_this_cell' );
          });
 
+         function populateBoard(data) {
+           game = data
+           data.game.pieces.forEach(function(p) {
+             var piece = p.piece
+             cell = $('#Board tr td[row='+ piece.y_position +'][col=' + piece.x_position + ']');
+             cell.html('<img alt="P" src="' + piece.icon + '" piece_id="' + piece.id + '" >');
+           });
+         }
+
       $( "td" ).click(
         function(event) {
           pieceLocation = $(event.target).attr('id');
@@ -23,6 +32,19 @@
             console.log(data)
           }
         });
+
+      $.ajax({
+        url: '<%= game_path(@game, format: :json) %>'
+      }).done(function( data ) {
+          console.log( "Sample of data:", data );
+          populateBoard(data);
+        });
+      $('#board').ready( function(){
+        $('#Board tr td').each(function(i) {
+          $( this ).attr('row', $( this ).parent().index());
+          $( this ).attr('col', $( this ).index());
+        })
+      });
     });
 
 
