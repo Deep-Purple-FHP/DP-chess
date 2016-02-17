@@ -1,8 +1,21 @@
-class Pieces::Base < Piece
+class Pieces::Base < ActiveRecord::Base
+  self.table_name = :pieces
 
   # Piece < Player < Game < Active Record
   belongs_to :player
   belongs_to :game
+
+  scope :black, -> { where(color: 'purple') }
+  scope :white, -> { where(color: 'white') }
+
+  validate :valid_move?
+
+  def valid_move?
+  end
+
+  def black?
+    color == 'purple'
+  end
 
   def convert_string_location_to_coords(str)
     [%w(A B C D E F G H).index(str[0]), (str[1].to_i - 1)]
@@ -38,8 +51,6 @@ class Pieces::Base < Piece
     self.x_position = x
     self.y_position = y
     self.save
-
-
   end
 
   def vertical_obstruction_check(destination_x, destination_y, overall_difference)

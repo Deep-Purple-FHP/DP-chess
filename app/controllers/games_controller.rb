@@ -17,12 +17,10 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  private
 
-end
-
-
-private
-
-def game_params
-  params.require(:game).permit(:name, :state, :white_player_id, :black_player_id, :winning_player_id)
+  def game_params
+    params.require(:game).permit(
+      :name, :state, :white_player_id, :black_player_id, :winning_player_id)
+  end
 end
